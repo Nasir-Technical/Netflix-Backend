@@ -1,0 +1,56 @@
+import express from 'express';
+import dotenv from 'dotenv';
+import databaseConnection from './utils/database.js';
+import cookieParser from 'cookie-parser';
+import userRoute from "./routes/userRoute.js";
+import cors from "cors";
+import path from "path";
+import { fileURLToPath } from 'url';
+
+dotenv.config({ path: './.env' });
+
+databaseConnection();
+
+const app = express();
+
+// Middlewares
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cookieParser());
+
+const corsOptions = {
+    origin: 'http://localhost:5173',
+    credentials: true
+};
+app.use(cors(corsOptions));
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Authentication Middleware
+const isAuthenticated = (req, res, next) => {
+    if (req.cookies.token) {
+        next(); // User is authenticated
+    } else {
+        res.redirect('/login'); // User is not authenticated, redirect to login page
+    }
+};
+
+// Serve static files from the React app's build directory
+app.use(express.static(path.join(__dirname, '../netflix-frontend/dist')));
+
+// Apply authentication middleware to the /browser route
+app.use('/browser', isAuthenticated);
+
+// Handle any requests that don't match the ones above and serve index.html
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../netflix-frontend/dist', 'index.html'));
+});
+
+// API Routes
+app.use("/api/v1/user", userRoute);
+
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
