@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 const corsOptions = {
-    origin: 'http://localhost:5173',
+    origin: 'http://localhost:5173', // Adjust this based on your environment
     credentials: true
 };
 app.use(cors(corsOptions));
@@ -27,28 +27,30 @@ app.use(cors(corsOptions));
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Authentication Middleware
-const isAuthenticated = (req, res, next) => {
-    if (req.cookies.token) {
-        next(); // User is authenticated
-    } else {
-        res.redirect('/login'); // User is not authenticated, redirect to login page
-    }
-};
-
 // Serve static files from the React app's build directory
 app.use(express.static(path.join(__dirname, '../netflix-frontend/dist')));
 
-// Apply authentication middleware to the /browser route
-app.use('/browser', isAuthenticated);
+// API Routes
+app.use("/api/v1/user", userRoute);
 
 // Handle any requests that don't match the ones above and serve index.html
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../netflix-frontend/dist', 'index.html'));
 });
 
-// API Routes
-app.use("/api/v1/user", userRoute);
+// Authentication Middleware
+const isAuthenticated = (req, res, next) => {
+    if (req.cookies.token) {
+        next(); // User is authenticated
+    } else {
+        res.redirect('/'); // User is not authenticated, redirect to login page
+    }
+};
+
+// Protect the /browse route
+app.get('/browse', isAuthenticated, (req, res) => {
+    res.sendFile(path.join(__dirname, '../netflix-frontend/dist', 'index.html'));
+});
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
