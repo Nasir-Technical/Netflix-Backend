@@ -7,10 +7,13 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from 'url';
 
+// Load environment variables from .env file
 dotenv.config({ path: './.env' });
 
+// Connect to the database
 databaseConnection();
 
+// Initialize Express app
 const app = express();
 
 // Middlewares
@@ -24,6 +27,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+// Resolve __dirname and __filename
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -52,8 +56,8 @@ app.get('/browse', isAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../netflix-frontend/dist', 'index.html'));
 });
 
+// Start the server
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
- 
