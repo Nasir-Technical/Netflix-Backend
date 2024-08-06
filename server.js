@@ -28,7 +28,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// Resolve __dirname and __filename
+// Resolve __filename and __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
