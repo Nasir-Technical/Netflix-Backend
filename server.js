@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 const corsOptions = {
-    origin: 'https://netflix-clone-tau-lime-70.vercel.app',  
+    origin:  'https://netflix-clone-tau-lime-70.vercel.app', // Frontend origin
     credentials: true
 };
 app.use(cors(corsOptions));
@@ -35,7 +35,7 @@ const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, '../netflix-frontend/dist')));
 
 // API Routes
-app.use("/api/v1/user", userRoute);
+app.use("/api/v1/user/login", userRoute);
 
 // Handle any requests that don't match the ones above and serve index.html
 app.get('*', (req, res) => {
