@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 const corsOptions = {
-    origin: 'https://netflix-clone-five-dusky.vercel.app',  
+    origin: 'https://netflix-clone-tau-lime-70.vercel.app',  
     credentials: true
 };
 app.use(cors(corsOptions));
