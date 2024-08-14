@@ -2,30 +2,30 @@
   "version": 2,
   "builds": [
     {
-      "src": "server.js",
+      "src": "./index.js",
       "use": "@vercel/node"
     },
     {
-      "src": "dist/**",
+      "src": "./build/**",
       "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/server.js"
+      "dest": "./index.js"
     },
     {
       "src": "/test",
-      "dest": "/server.js"
+      "dest": "./index.js"
     },
     {
       "src": "/browse",
-      "dest": "/server.js"
+      "dest": "./index.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/server.js"
+      "dest": "./index.js"
     }
   ]
 }
