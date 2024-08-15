@@ -1,5 +1,8 @@
 {
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" }
+  ],
+  "routes": [
+    { "src": "/api/v1/user/login", "methods": ["POST"], "dest": "/api/v1/user/login" }
   ]
 }
