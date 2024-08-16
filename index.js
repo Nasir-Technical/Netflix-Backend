@@ -39,6 +39,11 @@ app.get("/test", (req, res) => {
     res.send("Serving...");
 });
 
+// Dummy route for testing
+app.get('/dummy', (req, res) => {
+    res.send('<h1>This is a dummy route</h1>');
+  });
+
 // API Routes
 app.use("/api/v1/user", userRoute);
 
