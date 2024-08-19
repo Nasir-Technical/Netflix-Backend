@@ -32,8 +32,8 @@ app.use(cors(corsOptions));
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Serve static files from the React app's build directory
-app.use(express.static(path.join(__dirname, './build')));
+// Serve static files from the React app's dist directory
+app.use(express.static(path.join(__dirname, './dist')));
 
 app.get("/test", (req, res) => {
     res.send("Serving...");
@@ -49,7 +49,7 @@ app.use("/api/v1/user", userRoute);
 
 // Handle any requests that don't match the ones above and serve index.html
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, './build', 'index.html'));
+    res.sendFile(path.join(__dirname, './dist', 'index.html'));
 });
 
 // Authentication Middleware
@@ -63,7 +63,7 @@ const isAuthenticated = (req, res, next) => {
 
 // Protect the /browse route
 app.get('/browse', isAuthenticated, (req, res) => {
-    res.sendFile(path.join(__dirname, './build', 'index.html'));
+    res.sendFile(path.join(__dirname, './dist', 'index.html'));
 });
 
 
