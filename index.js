@@ -22,8 +22,8 @@ app.use(express.json());
 app.use(cookieParser());
 
 const corsOptions = {
-    origin: process.env.FRONT_URL,  // Aapka frontend URL
-    methods: ['GET', 'POST'],  // Ensure POST method included hai
+    origin: process.env.FRONT_URL,  // frontend URL
+    methods: ['GET', 'POST'],  
     credentials: true
 };
 app.use(cors(corsOptions));
