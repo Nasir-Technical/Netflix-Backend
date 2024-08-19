@@ -1,0 +1,36 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "public/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/v1/user/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/backend/build/index.html"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/v1/user/$1"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/api/v1/user/login",
+      "destination": "/api/v1/user/login",
+      "statusCode": 308
+    }
+  ]
+}
