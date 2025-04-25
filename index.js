@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 const corsOptions = {
-    // origin: process.env.FRONT_URL,  // frontend URL
+    origin: process.env.FRONT_URL,  // frontend URL
     origin: 'http://localhost:3000',  // Allow requests from frontend
     methods: ['GET', 'POST'],  
     credentials: true
