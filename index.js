@@ -50,7 +50,7 @@ app.use("/api/v1/user", userRoute);
 
 // Handle any requests that don't match the ones above and serve index.html
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, './build', 'index.html'));
+    res.sendFile(path.join(__dirname, './build', './build/index.html'));
 });
 
 // Authentication Middleware
@@ -64,7 +64,7 @@ const isAuthenticated = (req, res, next) => {
 
 // Protect the /browse route
 app.get('/browse', isAuthenticated, (req, res) => {
-    res.sendFile(path.join(__dirname, './build', 'index.html'));
+    res.sendFile(path.join(__dirname, './build', './build/index.html'));
 });
 
 
