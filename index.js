@@ -21,22 +21,24 @@ app.use(cookieParser());
 
 // CORS
 const corsOptions = {
-  origin: "*", // ⚠️ Change this to frontend URL in production
-  methods: ["GET", "POST"],
-  credentials: true,
+    origin: 'https://netflix-frontend-one-chi.vercel.app/', // or 3000 depending on frontend
+    methods: ["GET", "POST"],
+    credentials: true,
 };
 app.use(cors(corsOptions));
+
+
 
 // Routes
 app.use("/api/v1/user", userRoute);
 
 // Health check
 app.get("/api/test", (req, res) => {
-  res.send("Backend is working!");
+    res.send("Backend is working!");
 });
 
 // Start server
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`✅ Server is running on port ${PORT}`);
+    console.log(`✅ Server is running on port ${PORT}`);
 });
