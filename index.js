@@ -21,7 +21,11 @@ app.use(cookieParser());
 
 // CORS
 const corsOptions = {
-    origin: ["http://localhost:3000", "https://netflix-frontend-one-chi.vercel.app"],
+    origin: [
+        "http://localhost:3000",
+        "https://netflix-frontend-one-chi.vercel.app", // <-- Ye add karo
+        "https://touch-stated-columns-ping.trycloudflare.com" // <-- optional, par useful
+      ],
     methods: ["GET", "POST"],
     credentials: true,
 };
