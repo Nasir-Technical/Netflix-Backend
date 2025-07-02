@@ -21,13 +21,14 @@ app.use(cookieParser());
 
 // CORS
 const corsOptions = {
-    origin: "https://touch-stated-columns-ping.trycloudflare.com",
-    methods: ["GET", "POST"],
+    origin: [
+      "https://netflix-frontend-one-chi.vercel.app",
+      "https://shirts-valves-neighborhood-legitimate.trycloudflare.com"
+    ],
     credentials: true,
-};
-app.use(cors(corsOptions));
-
-
+    methods: ["GET", "POST", "PUT", "DELETE"]
+  };
+  app.use(cors(corsOptions));
 
 // Routes
 app.use("/api/v1/user", userRoute);
