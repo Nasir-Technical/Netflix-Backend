@@ -21,7 +21,7 @@ app.use(cookieParser());
 
 // CORS
 const corsOptions = {
-    origin: "*",
+    origin: "https://touch-stated-columns-ping.trycloudflare.com",
     methods: ["GET", "POST"],
     credentials: true,
 };
