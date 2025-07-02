@@ -22,12 +22,13 @@ app.use(cookieParser());
 // CORS
 const corsOptions = {
     origin: [
-      "https://netflix-frontend-one-chi.vercel.app",
-      "https://shirts-valves-neighborhood-legitimate.trycloudflare.com"
-    ],
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"]
-  };
+        "http://localhost:3000", // local testing
+        "https://netflix-frontend-one-chi.vercel.app", // deployed frontend
+        "https://shirts-valves-neighborhood-legitimate.trycloudflare.com" // tunnel URL
+      ],
+      credentials: true,
+      methods: ["GET", "POST", "PUT", "DELETE"]
+    };
   app.use(cors(corsOptions));
 
 // Routes
