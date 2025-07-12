@@ -19,43 +19,29 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// ✅ CORS Options
+// CORS
 const corsOptions = {
-  origin: [
-    "http://localhost:3000", // Local development
-    "https://netflix-frontend-one-chi.vercel.app", // Vercel frontend
-    "https://shirts-valves-neighborhood-legitimate.trycloudflare.com" // Cloudflare tunnel
-  ],
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  credentials: true
+    origin: [
+        "http://localhost:3000",
+        "http://16.170.203.78",
+        "https://jazzy-axolotl-c42044.netlify.app"
+    ],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
 };
-
-// ✅ CORS Middleware
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // For preflight requests
-
-// ✅ Manually set headers (extra safety)
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  if (corsOptions.origin.includes(origin)) {
-    res.setHeader("Access-Control-Allow-Origin", origin);
-  }
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.header("Access-Control-Allow-Credentials", "true");
-  next();
-});
+  app.use(cors(corsOptions));
+  
 
 // Routes
 app.use("/api/v1/user", userRoute);
 
 // Health check
 app.get("/api/test", (req, res) => {
-  res.send("✅ Backend is working!");
+    res.send("Backend is working!");
 });
 
-// Server listen
+// Start server
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`✅ Server is running on port ${PORT}`);
+    console.log(`✅ Server is running on port ${PORT}`);
 });
