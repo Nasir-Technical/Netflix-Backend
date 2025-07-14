@@ -22,13 +22,13 @@ app.use(cookieParser());
 // CORS
 const corsOptions = {
     origin: [
-        "http://localhost:3000",
-        "http://16.170.203.78",
-        "https://jazzy-axolotl-c42044.netlify.app"
+      "https://jazzy-axolotl-c42044.netlify.app",  // ✅ Netlify frontend
+      "http://localhost:3000",                     // ✅ Local development
     ],
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-};
+    methods: ["GET", "POST", "PUT", "DELETE"]
+  };
+  
   app.use(cors(corsOptions));
   
 
