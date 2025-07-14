@@ -22,7 +22,7 @@ app.use(cookieParser());
 // CORS
 const corsOptions = {
     origin: [
-      "https://jazzy-axolotl-c42044.netlify.app",  // ✅ Netlify frontend
+      "https://calm-rugelach-4e62b1.netlify.app/",  // ✅ Netlify frontend
       "http://localhost:3000",                     // ✅ Local development
     ],
     credentials: true,
