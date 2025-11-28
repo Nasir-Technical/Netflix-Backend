@@ -4,6 +4,7 @@ import databaseConnection from '../utils/database.js';
 import cookieParser from 'cookie-parser';
 import userRoute from "../routes/userRoute.js";
 import cors from "cors";
+import serverless from 'serverless-http';
 
 // Load env vars
 dotenv.config();
