@@ -1,8 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import databaseConnection from './utils/database.js';
+import databaseConnection from '../utils/database.js';
 import cookieParser from 'cookie-parser';
-import userRoute from "./routes/userRoute.js";
+import userRoute from "../routes/userRoute.js";
 import cors from "cors";
 
 // Load env vars
@@ -22,7 +22,7 @@ app.use(cookieParser());
 // CORS
 const corsOptions = {
     origin: [
-      "https://calm-rugelach-4e62b1.netlify.app",  // ✅ Netlify frontend
+      "https://calm-rugelach-4e62b1.netlify.app/",  // ✅ Netlify frontend
       "http://localhost:3000",                     
     ],
     credentials: true,
@@ -41,7 +41,10 @@ app.get("/api/test", (req, res) => {
 });
 
 // Start server
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-    console.log(`✅ Server is running on port ${PORT}`);
-});
+// const PORT = process.env.PORT || 8080;
+// app.listen(PORT, () => {
+//     console.log(`✅ Server is running on port ${PORT}`);
+// });
+
+// Export handler for serverless platforms (Vercel)
+export const handler = serverless(app);
