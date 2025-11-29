@@ -23,7 +23,7 @@ app.use(cookieParser());
 // CORS
 const corsOptions = {
     origin: [
-        "https://calm-rugelach-4e62b1.netlify.app",  // ✅ Netlify frontend
+        "https://netflix-frontend-five-phi.vercel.app",  // ✅ Netlify frontend
       "http://localhost:3000",                     
     ],
     credentials: true,
