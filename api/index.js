@@ -21,16 +21,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // CORS
+// CORS FIX (Vercel Serverless Compatible)
 const corsOptions = {
-    origin: [
-        "https://netflix-frontend-five-phi.vercel.app",  // ✅ Netlify frontend
-      "http://localhost:3000",                     
-    ],
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"]
-  };
-  
-  app.use(cors(corsOptions));
+  origin: [
+    "https://netflix-frontend-five-phi.vercel.app",
+    "http://localhost:3000"
+  ],
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions)); // ← MUST HAVE for preflight
+
   
 
 // Routes
