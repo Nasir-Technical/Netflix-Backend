@@ -23,7 +23,7 @@ app.use(cookieParser());
 // CORS
 const corsOptions = {
     origin: [
-      "https://calm-rugelach-4e62b1.netlify.app/",  // ✅ Netlify frontend
+        "https://calm-rugelach-4e62b1.netlify.app",  // ✅ Netlify frontend
       "http://localhost:3000",                     
     ],
     credentials: true,
@@ -48,4 +48,5 @@ app.get("/api/test", (req, res) => {
 // });
 
 // Export handler for serverless platforms (Vercel)
-export const handler = serverless(app);
+// Vercel Node serverless functions expect a default export.
+export default serverless(app);
