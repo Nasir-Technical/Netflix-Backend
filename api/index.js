@@ -6,6 +6,22 @@ import userRoute from "../routes/userRoute.js";
 import cors from "cors";
 import serverless from 'serverless-http';
 
+// CORS
+// CORS FIX (Vercel Serverless Compatible)
+const corsOptions = {
+  origin: [
+    "https://netflix-frontend-five-phi.vercel.app",
+    "http://localhost:5173"
+  ],
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+  allowedHeaders: "Content-Type, Authorization"
+};
+
+app.use(cors(corsOptions));
+
+app.options("*", cors(corsOptions)); // <-- VERY IMPORTANT
+
 // Load env vars
 dotenv.config();
 
@@ -20,19 +36,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// CORS
-// CORS FIX (Vercel Serverless Compatible)
-const corsOptions = {
-  origin: [
-    "https://netflix-frontend-five-phi.vercel.app",
-    "http://localhost:3000"
-  ],
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-};
-
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions)); // ← MUST HAVE for preflight
 
   
 
