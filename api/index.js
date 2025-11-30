@@ -6,6 +6,16 @@ import userRoute from "../routes/userRoute.js";
 import cors from "cors";
 import serverless from 'serverless-http';
 
+
+// Load env vars
+dotenv.config();
+
+// Connect to DB
+databaseConnection();
+
+// App initialize
+const app = express();
+
 // CORS
 // CORS FIX (Vercel Serverless Compatible)
 const corsOptions = {
@@ -19,25 +29,12 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
 app.options("*", cors(corsOptions)); // <-- VERY IMPORTANT
-
-// Load env vars
-dotenv.config();
-
-// Connect to DB
-databaseConnection();
-
-// App initialize
-const app = express();
 
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-
-
-  
 
 // Routes
 app.use("/api/v1/user", userRoute);
