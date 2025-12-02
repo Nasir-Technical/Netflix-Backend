@@ -54,12 +54,11 @@
 // // Vercel Node serverless functions expect a default export.
 // export default serverless(app);
 
-// api/index.js
 import express from 'express';
 import dotenv from 'dotenv';
-import databaseConnection from '../utils/database.js';
+import databaseConnection from './utils/database.js';
 import cookieParser from 'cookie-parser';
-import userRoute from "../routes/userRoute.js";
+import userRoute from "./routes/userRoute.js";
 import cors from "cors";
 import serverless from 'serverless-http';
 
@@ -85,19 +84,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+// IMPORTANT FIX
 app.use("/api/v1/user", userRoute);
 
 app.get("/api/test", (req, res) => {
   res.send("Backend is working!");
 });
 
-// Local server start for development
-// if (process.env.NODE_ENV !== 'production') {
-//   const PORT = process.env.PORT || 8080;
-//   app.listen(PORT, () => {
-//     console.log(`✅ Backend running locally on http://localhost:${PORT}`);
-//   });
-// }
-
-// Export default for Vercel serverless
-export default serverless(app);
+export const handler = serverless(app);
