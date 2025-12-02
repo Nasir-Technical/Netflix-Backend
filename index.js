@@ -86,7 +86,7 @@ app.use(cookieParser());
 
 app.use("/api/v1/user", userRoute);
 
-app.get("/api/test", (req, res) => {
+app.get("/test", (req, res) => {
   res.send("Backend is working!");
 });
 
