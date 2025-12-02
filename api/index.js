@@ -92,12 +92,12 @@ app.get("/api/test", (req, res) => {
 });
 
 // Local server start for development
-if (process.env.NODE_ENV !== 'production') {
-  const PORT = process.env.PORT || 8080;
-  app.listen(PORT, () => {
-    console.log(`✅ Backend running locally on http://localhost:${PORT}`);
-  });
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   const PORT = process.env.PORT || 8080;
+//   app.listen(PORT, () => {
+//     console.log(`✅ Backend running locally on http://localhost:${PORT}`);
+//   });
+// }
 
 // Export default for Vercel serverless
-// export default serverless(app);
+export default serverless(app);
