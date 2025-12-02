@@ -90,4 +90,10 @@ app.get("/api/test", (req, res) => {
   res.send("Backend is working!");
 });
 
+// // Start server
+// const PORT = process.env.PORT || 8080;
+// app.listen(PORT, () => {
+//     console.log(`✅ Server is running on port ${PORT}`);
+// });
+
 export const handler = serverless(app);

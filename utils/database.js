@@ -1,8 +1,11 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+dotenv.config(); // <-- yeh line add karo
 
 const MONGO_URL = process.env.MONGO_URL;
 
-let isConnected = false; // <-- important for serverless
+let isConnected = false;
 
 export default async function databaseConnection() {
   if (isConnected) {
