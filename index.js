@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import databaseConnection from '../utils/database.js';
 import cookieParser from 'cookie-parser';
-import userRoute from "../routes/userRoute.js";
+// import userRoute from "../routes/userRoute.js";
 import cors from "cors";
 
 
@@ -37,11 +37,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Routes
-app.use("/api/v1/user", userRoute);
+// app.use("/api/v1/user", userRoute);
 
 // Health check
 app.get("/api/test", (req, res) => {
-    res.send("Backend is working!");
+  res.type('text');
+  res.send("Backend is working!");
 });
 
 // Start server
