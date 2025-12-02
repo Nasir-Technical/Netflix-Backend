@@ -1,3 +1,60 @@
+// import express from 'express';
+// import dotenv from 'dotenv';
+// import databaseConnection from '../utils/database.js';
+// import cookieParser from 'cookie-parser';
+// import userRoute from "../routes/userRoute.js";
+// import cors from "cors";
+// import serverless from 'serverless-http';
+
+
+// // Load env vars
+// dotenv.config();
+
+// // Connect to DB
+// databaseConnection();
+
+// // App initialize
+// const app = express();
+
+// // CORS
+// // CORS FIX (Vercel Serverless Compatible)
+// const corsOptions = {
+//   origin: [
+//     "https://netflix-frontend-five-phi.vercel.app",
+//     "http://localhost:5173"
+//   ],
+//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//   credentials: true,
+//   allowedHeaders: "Content-Type, Authorization"
+// };
+
+// app.use(cors(corsOptions));
+// app.options("*", cors(corsOptions)); // <-- VERY IMPORTANT
+
+// // Middleware
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
+// app.use(cookieParser());
+
+// // Routes
+// app.use("/api/v1/user", userRoute);
+
+// // Health check
+// app.get("/api/test", (req, res) => {
+//     res.send("Backend is working!");
+// });
+
+// // Start server
+// // const PORT = process.env.PORT || 8080;
+// // app.listen(PORT, () => {
+// //     console.log(`✅ Server is running on port ${PORT}`);
+// // });
+
+// // Export handler for serverless platforms (Vercel)
+// // Vercel Node serverless functions expect a default export.
+// export default serverless(app);
+
+// api/index.js
 import express from 'express';
 import dotenv from 'dotenv';
 import databaseConnection from '../utils/database.js';
@@ -6,22 +63,15 @@ import userRoute from "../routes/userRoute.js";
 import cors from "cors";
 import serverless from 'serverless-http';
 
-
-// Load env vars
 dotenv.config();
-
-// Connect to DB
 databaseConnection();
 
-// App initialize
 const app = express();
 
-// CORS
-// CORS FIX (Vercel Serverless Compatible)
 const corsOptions = {
   origin: [
     "https://netflix-frontend-five-phi.vercel.app",
-    "http://localhost:5173"
+    "http://localhost:3000"
   ],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
@@ -29,27 +79,25 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions)); // <-- VERY IMPORTANT
+app.options("*", cors(corsOptions));
 
-// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Routes
 app.use("/api/v1/user", userRoute);
 
-// Health check
 app.get("/api/test", (req, res) => {
-    res.send("Backend is working!");
+  res.send("Backend is working!");
 });
 
-// Start server
-// const PORT = process.env.PORT || 8080;
-// app.listen(PORT, () => {
-//     console.log(`✅ Server is running on port ${PORT}`);
-// });
+// Local server start for development
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 8080;
+  app.listen(PORT, () => {
+    console.log(`✅ Backend running locally on http://localhost:${PORT}`);
+  });
+}
 
-// Export handler for serverless platforms (Vercel)
-// Vercel Node serverless functions expect a default export.
-export default serverless(app);
+// Export default for Vercel serverless
+// export default serverless(app);
