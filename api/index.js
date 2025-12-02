@@ -1,5 +1,4 @@
-// api/index.js
-const serverless = require('serverless-http');
-const app = require('../dist/app.js'); // ← aap ki compiled Express app
+import serverless from 'serverless-http';
+import app from '../app.js';   // ← direct app file (dist nahi)
 
-module.exports = serverless(app);      // ← MUST be module.exports
+export default serverless(app); // ← MUST be export default
