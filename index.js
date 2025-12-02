@@ -54,13 +54,13 @@
 // // Vercel Node serverless functions expect a default export.
 // export default serverless(app);
 
-import express from 'express';
-import dotenv from 'dotenv';
-import databaseConnection from './utils/database.js';
-import cookieParser from 'cookie-parser';
+import express from "express";
+import dotenv from "dotenv";
+import databaseConnection from "./utils/database.js";
+import cookieParser from "cookie-parser";
 import userRoute from "./routes/userRoute.js";
 import cors from "cors";
-import serverless from 'serverless-http';
+import serverless from "serverless-http";
 
 dotenv.config();
 databaseConnection();
@@ -84,7 +84,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// IMPORTANT FIX
 app.use("/api/v1/user", userRoute);
 
 app.get("/api/test", (req, res) => {
