@@ -1,7 +1,5 @@
 // api/index.js
-import dotenv from 'dotenv';
-dotenv.config();
-import app from '../index.js';
-import serverless from 'serverless-http';
+const serverless = require('serverless-http');
+const app = require('../dist/app.js'); // ← aap ki compiled Express app
 
-export default serverless(app);   // ← MUST be default export
+module.exports = serverless(app);      // ← MUST be module.exports
