@@ -60,7 +60,7 @@ import databaseConnection from "./utils/database.js";
 import cookieParser from "cookie-parser";
 import userRoute from "./routes/userRoute.js";
 import cors from "cors";
-import serverless from "serverless-http";
+// import serverless from "serverless-http";
 
 dotenv.config();
 databaseConnection();
@@ -96,4 +96,4 @@ app.get("/api/test", (req, res) => {
 //     console.log(`✅ Server is running on port ${PORT}`);
 // });
 
-export const handler = serverless(app);
+// export const handler = serverless(app);

@@ -1,3 +1,7 @@
+// api/index.js
 import dotenv from 'dotenv';
-dotenv.config();                 // Vercel env vars load
-import('../index.js');           // aap ka asli express + handler wala file
+dotenv.config();
+import app from '../index.js';
+import serverless from 'serverless-http';
+
+export default serverless(app);   // ← MUST be default export
