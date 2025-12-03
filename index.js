@@ -40,8 +40,9 @@ app.use(cookieParser());
 app.use("/api/v1/user", userRoute);
 
 // Health check
-app.get("/", (req, res) => {
-  res.send("Netflix Backend is working!");
+app.get("/api/test", (req, res) => {
+  res.type('text');
+  res.send("Backend is working!");
 });
 
 // Start server
