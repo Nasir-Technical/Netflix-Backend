@@ -1,27 +1,22 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv";
-
-dotenv.config(); // <-- yeh line add karo
-
-const MONGO_URL = process.env.MONGO_URL;
 
 let isConnected = false;
 
-export default async function databaseConnection() {
+async function databaseConnection() {
   if (isConnected) {
-    console.log("MongoDB already connected.");
+    console.log("MongoDB already connected");
     return;
   }
 
   try {
-    const db = await mongoose.connect(MONGO_URL, {
-      serverSelectionTimeoutMS: 5000,
-    });
+    const conn = await mongoose.connect(process.env.MONGO_URL);
+    isConnected = conn.connections[0].readyState === 1;
 
-    isConnected = db.connections[0].readyState === 1;
-    console.log("MongoDB connected successfully (serverless)");
+    console.log("MongoDB connected");
   } catch (error) {
-    console.error("MongoDB connection error:", error);
-    throw error;
+    console.error("MongoDB connection FAILED");
+    console.error(error);
   }
 }
+
+export default databaseConnection;
