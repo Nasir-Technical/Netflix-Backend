@@ -5,32 +5,49 @@ import cookieParser from 'cookie-parser';
 import userRoute from "./routes/userRoute.js";
 import cors from "cors";
 
+
+// Load env vars
 dotenv.config();
 
-const app = express();
-
-// ❗ Connect DB only once
+// Connect to DB
 databaseConnection();
 
-// CORS setup
+// App initialize
+const app = express();
+
+// CORS
+// CORS FIX (Vercel Serverless Compatible)
 const corsOptions = {
   origin: [
     "https://netflix-frontend-five-phi.vercel.app",
     "http://localhost:3000",
+    "https://netflix-backend-tawny.vercel.app/"
   ],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
+  allowedHeaders: "Content-Type, Authorization"
 };
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
 
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions)); // <-- VERY IMPORTANT
+
+// Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+// Routes
 app.use("/api/v1/user", userRoute);
 
-app.get("/api/test", (req, res) => {
-  res.send("Backend is working!");
+// Health check
+app.get("/", (req, res) => {
+  res.send("Netflix Backend is working!");
 });
+
+// Start server
+// const PORT = process.env.PORT || 8080;
+// app.listen(PORT, () => {
+//     console.log(`✅ Server is running on port ${PORT}`);
+// });
 
 export default app;
